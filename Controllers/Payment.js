@@ -46,6 +46,7 @@ const stripe = new Stripe(stripeSecretKey, {
 
 export const payment = async (req, res) => {
     const { vehiclecost } = req.body;
+    console.log(vehiclecost);
     
     let lineItems = [{
         price_data: {
@@ -58,14 +59,19 @@ export const payment = async (req, res) => {
         quantity: 1
     }];
 
+    console.log(req.Headers);
+    console.log(req.headers);
+
     try {
         const session = await stripe.checkout.sessions.create({
             payment_method_types: ["card"],
             line_items: lineItems,
             mode: "payment",
-            success_url: `${req.header.origin}/stripaymentsuccess`,
-            cancel_url: `${req.header.origin}/stripaymentfailure`
+           
+            success_url: `${req.headers.origin}/stripaymentsuccess`,
+            cancel_url: `${req.headers.origin}/stripaymentfailure`
         });
+        console.log(session);
         res.json({ id: session.id });
     } catch (error) {
         console.error("Error creating Stripe session:", error);
