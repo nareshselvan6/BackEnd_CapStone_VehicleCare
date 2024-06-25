@@ -20,7 +20,6 @@ export const registeruser=async(req,res)=>{
         res.status(200).json({newuser})
         
     } catch (error) {
-        console.log(error);
         res.status(500).send("error occur while registering")
     }
 }
@@ -50,7 +49,6 @@ export const usersignin=async(req,res)=>{
         res.status(200).json({message:"login successfully",accesstoken})
         
     } catch (error) {
-        console.log(error);
         res.status(500).send("error occured while sigining in");
         
     }

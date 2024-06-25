@@ -65,13 +65,10 @@ export const deletefeedback=async(req,res)=>{
 //! afterfeedback remainder
 export const afterfeedbackremainder=async (req,res)=>{
     const {customername,email}=req.body;
-    console.log(customername,email);
 
     const user=email;
-    console.log(user);
 
     const todaydate=new Date;
-    console.log(todaydate);
 
 
 

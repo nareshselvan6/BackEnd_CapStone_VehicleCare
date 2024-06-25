@@ -28,7 +28,6 @@
 //        success_url:"http://127.0.0.1/3000/",
 //        cancel_url:"http://127.0.0.1/3000/"
 //    })
-//    console.log(session);
 //    res.json({id:session.id})
 
 // }
@@ -67,7 +66,6 @@ export const payment = async (req, res) => {
             success_url: `${req.header.origin}/stripaymentsuccess`,
             cancel_url: `${req.header.origin}/stripaymentfailure`
         });
-        console.log(session);
         res.json({ id: session.id });
     } catch (error) {
         console.error("Error creating Stripe session:", error);
