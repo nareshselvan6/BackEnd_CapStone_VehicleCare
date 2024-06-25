@@ -46,7 +46,10 @@ const stripe = new Stripe(stripeSecretKey, {
 
 export const payment = async (req, res) => {
     const { vehiclecost } = req.body;
-    console.log(vehiclecost);
+    // console.log(vehiclecost);
+
+    const success=req.headers.origin?req.headers.origin:"https://frontend-capstone-vehiclecare.netlify.app/";
+
     
     let lineItems = [{
         price_data: {
@@ -59,8 +62,9 @@ export const payment = async (req, res) => {
         quantity: 1
     }];
 
-    console.log(req.Headers);
-    console.log(req.headers);
+    // console.log(req.Headers);
+    // console.log(req.headers);
+
 
     try {
         const session = await stripe.checkout.sessions.create({
@@ -68,8 +72,8 @@ export const payment = async (req, res) => {
             line_items: lineItems,
             mode: "payment",
            
-            success_url: `${req.headers.origin}/stripaymentsuccess`,
-            cancel_url: `${req.headers.origin}/stripaymentfailure`
+            success_url: `${success}/stripaymentsuccess`,
+            cancel_url: `${success}/stripaymentfailure`
         });
         console.log(session);
         res.json({ id: session.id });
