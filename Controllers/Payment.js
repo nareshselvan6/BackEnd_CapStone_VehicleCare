@@ -64,8 +64,8 @@ export const payment = async (req, res) => {
             payment_method_types: ["card"],
             line_items: lineItems,
             mode: "payment",
-            success_url: "http://localhost:5173/stripaymentsuccess",
-            cancel_url: "http://127.0.0.1:3000/cancel"
+            success_url: `${req.header.origin}/stripaymentsuccess`,
+            cancel_url: `${req.header.origin}/stripaymentfailure`
         });
         console.log(session);
         res.json({ id: session.id });
